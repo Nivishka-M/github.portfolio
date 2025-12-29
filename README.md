@@ -62,5 +62,5 @@ solid engineering principles.
 
 ## Contact
 
-- LinkedIn: (add link)
-- Email: (professional email)
+- LinkedIn: [Nivishka Manchanayake](https://www.linkedin.com/in/nivishka-manchanayake-381870240/)
+- Email: [nivishkaabhith@gmail.com](mailto:nivishkaabhith@gmail.com)
