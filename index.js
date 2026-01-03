@@ -86,3 +86,108 @@ document.addEventListener('DOMContentLoaded', () => {
     box.style.transition = 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
   });
 });
+
+/* -----------------------------------------
+  Scroll Reveal Animations 
+ ---------------------------------------- */
+
+const revealElements = () => {
+  const reveals = document.querySelectorAll('.reveal, .reveal-stagger');
+  const windowHeight = window.innerHeight;
+  
+  reveals.forEach(element => {
+    const elementTop = element.getBoundingClientRect().top;
+    const revealPoint = 150;
+    
+    if (elementTop < windowHeight - revealPoint) {
+      element.classList.add('active');
+    }
+  });
+};
+
+// Add reveal classes to sections
+document.addEventListener('DOMContentLoaded', () => {
+  // Add reveal class to main sections
+  const sections = document.querySelectorAll('section');
+  sections.forEach(section => {
+    section.classList.add('reveal');
+  });
+  
+  // Add stagger effect to grid containers
+  const grids = document.querySelectorAll('.work__boxes, .tools__grid, .contact__cards');
+  grids.forEach(grid => {
+    grid.classList.add('reveal-stagger');
+  });
+  
+  // Initial check
+  revealElements();
+});
+
+// Listen for scroll
+window.addEventListener('scroll', revealElements);
+
+/* -----------------------------------------
+  Parallax Effect for Background Elements 
+ ---------------------------------------- */
+
+document.addEventListener('scroll', () => {
+  const scrolled = window.pageYOffset;
+  const orbs = document.querySelectorAll('.header__gradient-orb');
+  
+  orbs.forEach((orb, index) => {
+    const speed = 0.1 + (index * 0.05);
+    orb.style.transform = `translateY(${scrolled * speed}px)`;
+  });
+});
+
+/* -----------------------------------------
+  Smooth Hover Glow Effect 
+ ---------------------------------------- */
+
+document.addEventListener('DOMContentLoaded', () => {
+  const cards = document.querySelectorAll('.work__box, .tools__category, .contact__card');
+  
+  cards.forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      
+      card.style.setProperty('--mouse-x', `${x}px`);
+      card.style.setProperty('--mouse-y', `${y}px`);
+    });
+  });
+});
+
+/* -----------------------------------------
+  Typing Effect for Subtitle (Optional) 
+ ---------------------------------------- */
+
+const addTypingEffect = () => {
+  const subtitle = document.querySelector('.header__text p');
+  if (!subtitle) return;
+  
+  const text = subtitle.textContent;
+  subtitle.textContent = '';
+  subtitle.style.borderRight = '2px solid var(--pink)';
+  
+  let i = 0;
+  const typeWriter = () => {
+    if (i < text.length) {
+      subtitle.textContent += text.charAt(i);
+      i++;
+      setTimeout(typeWriter, 30);
+    } else {
+      // Remove cursor after typing
+      setTimeout(() => {
+        subtitle.style.borderRight = 'none';
+      }, 1000);
+    }
+  };
+  
+  // Start typing after a delay
+  setTimeout(typeWriter, 500);
+};
+
+// Uncomment below to enable typing effect
+// document.addEventListener('DOMContentLoaded', addTypingEffect);
